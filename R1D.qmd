@@ -1,0 +1,261 @@
+---
+title: "R1D"
+author: "ryoke"
+format:
+  html:
+    theme: cosmo
+    ##css: styles.css
+    toc: true
+    toc-depth: 3
+    code-fold: false
+##project:
+  ##output-dir: docs    
+editor: visual
+---
+
+# R1D関数はどんな関数か
+
+#### ランク1テンソルを再構成する関数
+
+## ランク1テンソル
+
+N個のベクトルの外積
+
+$$
+\boldsymbol{a}_{1}\circ\boldsymbol{a}_{2}\circ\cdots\boldsymbol{a}_{N}
+$$
+
+![ランク1テンソルのダイアグラム表示](R1D(1).png){width="8%"}
+
+## ランク1テンソルの作成方法
+
+[要素1のN階テンソル$\mathbf{\mathcal{X}}\in\mathbb{R}^{1\times1\times \cdots \times1}$に対して，ベクトル$\{\boldsymbol{a}_{1},\boldsymbol{a}_{2},\cdots,\boldsymbol{a}_{N}\}$を逐次的に外積する.]{style="color:#FF6347"}
+
+::: callout-note
+外積：ベクトルを並べる操作
+
+つまり，バラバラの状態の$\{\boldsymbol{a}_{1},\boldsymbol{a}_{2},\cdots,\boldsymbol{a}_{N}\}$を並べると，$\boldsymbol{a}_{1}\circ\boldsymbol{a}_{2}\circ\cdots\boldsymbol{a}_{N}$になる.
+:::
+
+⇒`TMall`を使う
+
+-   外積なのに何故？
+
+　[$\mathbf{\mathcal{X}}$と$\{\boldsymbol{a}\}$の全モード積をとっているとも考えられるから]{style="color:#FF6347"}
+
+### $\mathbf{\mathcal{X}}$と$\{\boldsymbol{a}\}$の全モード積
+
+-   $N$階テンソル$\mathbf{\mathcal{X}}$について
+
+$N$個のベクトルの外積と捉える<br><br>
+
+![$\mathbf{\mathcal{X}}$のダイアグラム](R1D(2).png){width="25%" fig-align="left"}
+
+大きさ1のベクトル（スカラー）が$N$個
+
+全体で見るとスカラーなので脚は無し
+
+![$\mathbf{\mathcal{X}}$のダイアグラム](R1D(3).png){width="25%" fig-align="left"}
+
+-   $N$個のベクトル$\{\boldsymbol{a}_{1},\boldsymbol{a}_{2},\cdots,\boldsymbol{a}_{N}\}$について
+
+ベクトルが$N$個.
+
+まだ並んではいない
+
+![$\boldsymbol{a}_{n}$](R1D(4).png){width="3%" fig-align="left"}
+
+#### 全モード積を計算
+
+$\mathbf{\mathcal{X}}$と$\{\boldsymbol{a}\}$の全モード積
+
+![全モード積のイメージ](R1D(5).png){width="25%" fig-align="left"}
+
+::: callout-note
+Q. どこを繋げるのか.
+
+A.サイズ1の脚（mode）どうし <br>    ベクトルはサイズ$(I_{n}\times1)$スカラーはサイズ1と考える
+
+![ベクトル（左）スカラー（右） サイズ1の脚（赤色）](R1D(6).png){width="25%" fig-align="left"}
+:::
+
+<br>  サイズ1の脚どうしを繋ぐと
+
+![](R1D(7).png){width="25%" fig-align="left"}       ベクトルになった
+
+##### これを全モードについて行うと，
+
+<br><br>
+
+![](R1D(8).png){width="70%"} <br> ランク１テンソルの完成！ <br><br>
+
+#### [ランク1テンソルの作成方法：要素1のN階テンソル$\mathbf{\mathcal{X}}\in\mathbb{R}^{1\times1\times \cdots \times1}$とベクトル$\{\boldsymbol{a}_{1},\boldsymbol{a}_{2},\cdots,\boldsymbol{a}_{N}\}$の全モード積をとる.]{style="color:#DC143C"}
+
+⇒`TMall`
+
+# Rコードを作成
+
+## R1D関数を使わずにランク1テンソルを作成
+
+```{r}
+#| echo: false
+
+setwd("E:/home/ryoke/workspace/R/テンソルデータ解析の基礎と応用/test")
+
+##setwd("E:/home/yoshida/research/tetsuya-work/nmf-tensor/ref/book/テンソルネットワークの基礎と応用/to-students/workspace/R/tensor-analysis-basics/test")
+
+getwd()
+
+## ## ################################
+source("../fold-unfold.R")
+
+source("../TMprod.R")
+source("../TMall.R")
+
+source("../R1D.R")
+
+library(Matrix) 
+```
+
+### 1. 要素が1のテンソルを作成
+
+3階テンソル$\mathbf{\mathcal{G}}\in\mathbb{R}^{1\times1\times1}$
+
+```{r}
+nRank <- 3
+
+shape <- rep(1,nRank)
+
+G <- array(1  ## 全要素1
+           ,shape)
+```
+
+最初に階数`nRank`を設定
+
+サイズ`shape`は、1を階数個分繰り返す
+
+#### 計算用のオブジェクトにコピー
+
+```{r}
+X <- G
+```
+
+#### 確認
+
+-   要素1の$\mathbf{\mathcal{X}}\in\mathbb{R}^{1\times1\times1}$
+
+```{r}
+print(X)
+```
+
+-   サイズが$(1\times1\times1)$
+
+```{r}
+print(shape)
+```
+
+### 2. ベクトルのリストを作成
+
+ベクトルの集合$\{\boldsymbol{a}\}$
+
+行列型で作成する
+
+#### 領域確保
+
+```{r}
+listA <- NULL
+```
+
+#### `listA`にベクトルを格納していく
+
+```{r}
+for(n in c(1:nRank)){
+  le <- n+1  ## ベクトルごとに列数を変える
+  
+  ## 行列型で生成
+  ## 要素の値も確認したいので，簡単な要素にした。2025/04/17
+  A_n <- matrix(c(1:le) 
+               , ncol = 1)  
+  
+  listA[[n]] <- A_n
+}
+```
+
+#### 確認
+
+```{r}
+print(listA)
+```
+
+### 3. テンソルにベクトルを外積していく
+
+テンソル$\mathbf{\mathcal{X}}$と$\{\boldsymbol{a}\}$
+
+```{r}
+X1 <-  TMall(Tensor = X
+             , listA = listA
+             , .isDebug = TRUE)
+
+```
+
+#### 確認
+
+```{r}
+print(X1)
+dim(X1)
+```
+
+`X1`のサイズが`listA`の各要素のサイズと一致
+
+## R1D関数のコード
+
+```{r}
+# R1D関数  ---------------------------------------------------------------------
+
+R1D <- function(listA){
+  
+  ## 因子ベクトル{lista}の個数
+  N <- length(listA)
+  
+  ## N階テンソルX1の作成
+  X1 <- array(1,rep(1,N))
+  
+  ## X1と{a}の全モード積を計算
+  X <- TMall(X1,listA)
+  
+  return(X)
+}
+```
+
+-   引数：ベクトル$\{\boldsymbol{a}\}$（ベクトル（行列型）のリスト）
+
+-   N階テンソル$\mathbf{\mathcal{X}}\in\mathbb{R}^{1\times1\times \cdots \times1}$は，関数内で生成した. （関数外の方が良い？）
+
+    -   サイズ（shape）:`rep(1,N)`1をN回繰り返す.
+
+## R1D関数を使ってランク１テンソルを作成
+
+引数:`listA`
+
+```{r}
+#| echo: false
+print(listA)
+```
+
+```{r}
+X2 <- R1D(listA = listA)
+```
+
+#### 確認
+
+```{r}
+dim(X2)
+```
+
+#### 同一性の確認
+
+```{r}
+all.equal(X1,X2)
+```
+
+⇒R1D関数は正しく動いた.

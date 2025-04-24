@@ -1,0 +1,47 @@
+# /.quarto/
+# Windows系ユーザーデータは無視
+AppData/
+
+# Quartoの出力先（たとえばdocs）以外のビルド物も無視
+.Rproj.user/
+*.Rhistory
+*.RData
+*.Rproj
+
+# 一時ファイル系
+*.log
+*.tmp
+
+echo NTUSER.DAT >> .gitignore
+echo ntuser.dat.* >> .gitignore
+
+# Windowsシステムファイル
+NTUSER.DAT
+ntuser.*
+*.blf
+*.regtrans-ms
+ntuser.*
+
+# ユーザーフォルダ
+Contacts/
+Desktop/
+Documents/
+Downloads/
+Favorites/
+Links/
+Music/
+OneDrive/
+Pictures/
+Saved Games/
+Searches/
+Videos/
+
+# IDE系
+.vscode/
+.vscode-R/
+
+# その他
+.bash_history
+.gitconfig
+.crossnote/
+.texlive2024/
