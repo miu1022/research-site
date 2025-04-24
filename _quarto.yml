@@ -4,5 +4,14 @@ project:
   output-dir: docs
 
 
-
+website:
+  title: "miu-research"
+  navbar:
+    left:
+      - text: "Home"
+        file: index.qmd
+      - text: "R1D"
+        file: R1D.qmd
+      - text: "TVloo"
+        file: TVloo.qmd  
 

@@ -1,0 +1,53 @@
+---
+title: "TVloo"
+author: "ryoke"
+format:
+  html:
+    theme: cosmo
+    ##css: styles.css
+    toc: true
+    toc-depth: 3
+    code-fold: false
+project:
+  output-dir: docs    
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+setwd("E:/home/ryoke/research-site")
+
+##setwd("E:/home/yoshida/research/tetsuya-work/nmf-tensor/ref/book/テンソルネットワークの基礎と応用/to-students/workspace/R/tensor-analysis-basics/test")
+
+getwd()
+
+## ## ################################
+source("../workspace/R/テンソルデータ解析の基礎と応用/fold-unfold.R")
+
+##source("../workspace/R/テンソルデータ解析の基礎と応用/TMprod-TMall.R")
+source("../workspace/R/テンソルデータ解析の基礎と応用/TMprod.R")
+source("../workspace/R/テンソルデータ解析の基礎と応用/TMall.R")
+
+source("../workspace/R/テンソルデータ解析の基礎と応用/R1D.R")
+
+source("../workspace/R/テンソルデータ解析の基礎と応用/TVloo.R")
+
+library(Matrix) ## 2025/04/04
+
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
