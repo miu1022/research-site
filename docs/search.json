@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "R1D.html",
+    "href": "R1D.html",
+    "title": "R1D",
+    "section": "",
+    "text": "N個のベクトルの外積\n\\[\n\\boldsymbol{a}_{1}\\circ\\boldsymbol{a}_{2}\\circ\\cdots\\boldsymbol{a}_{N}\n\\]\n\n\n\nランク1テンソルのダイアグラム表示\n\n\n\n\n\n要素1のN階テンソル\\(\\mathbf{\\mathcal{X}}\\in\\mathbb{R}^{1\\times1\\times \\cdots \\times1}\\)に対して，ベクトル\\(\\{\\boldsymbol{a}_{1},\\boldsymbol{a}_{2},\\cdots,\\boldsymbol{a}_{N}\\}\\)を逐次的に外積する.\n\n\n\n\n\n\nNote\n\n\n\n外積：ベクトルを並べる操作\nつまり，バラバラの状態の\\(\\{\\boldsymbol{a}_{1},\\boldsymbol{a}_{2},\\cdots,\\boldsymbol{a}_{N}\\}\\)を並べると，\\(\\boldsymbol{a}_{1}\\circ\\boldsymbol{a}_{2}\\circ\\cdots\\boldsymbol{a}_{N}\\)になる.\n\n\n⇒TMallを使う\n\n外積なのに何故？\n\n　\\(\\mathbf{\\mathcal{X}}\\)と\\(\\{\\boldsymbol{a}\\}\\)の全モード積をとっているとも考えられるから\n\n\n\n\\(N\\)階テンソル\\(\\mathbf{\\mathcal{X}}\\)について\n\n\\(N\\)個のベクトルの外積と捉える\n\n\n\n\\(\\mathbf{\\mathcal{X}}\\)のダイアグラム\n\n\n大きさ1のベクトル（スカラー）が\\(N\\)個\n全体で見るとスカラーなので脚は無し\n\n\n\n\\(\\mathbf{\\mathcal{X}}\\)のダイアグラム\n\n\n\n\\(N\\)個のベクトル\\(\\{\\boldsymbol{a}_{1},\\boldsymbol{a}_{2},\\cdots,\\boldsymbol{a}_{N}\\}\\)について\n\nベクトルが\\(N\\)個.\nまだ並んではいない\n\n\n\n\\(\\boldsymbol{a}_{n}\\)\n\n\n\n\n\\(\\mathbf{\\mathcal{X}}\\)と\\(\\{\\boldsymbol{a}\\}\\)の全モード積\n\n\n\n全モード積のイメージ\n\n\n\n\n\n\n\n\nNote\n\n\n\nQ. どこを繋げるのか.\nA.サイズ1の脚（mode）どうし     ベクトルはサイズ\\((I_{n}\\times1)\\)スカラーはサイズ1と考える\n\n\n\nベクトル（左）スカラー（右） サイズ1の脚（赤色）\n\n\n\n\n  サイズ1の脚どうしを繋ぐと\n       ベクトルになった\n\n\n\n  ランク１テンソルの完成！ \n\n\n\n\n⇒TMall"
+  },
+  {
+    "objectID": "R1D.html#ランク1テンソル",
+    "href": "R1D.html#ランク1テンソル",
+    "title": "R1D",
+    "section": "",
+    "text": "N個のベクトルの外積\n\\[\n\\boldsymbol{a}_{1}\\circ\\boldsymbol{a}_{2}\\circ\\cdots\\boldsymbol{a}_{N}\n\\]\n\n\n\nランク1テンソルのダイアグラム表示"
+  },
+  {
+    "objectID": "R1D.html#ランク1テンソルの作成方法",
+    "href": "R1D.html#ランク1テンソルの作成方法",
+    "title": "R1D",
+    "section": "",
+    "text": "要素1のN階テンソル\\(\\mathbf{\\mathcal{X}}\\in\\mathbb{R}^{1\\times1\\times \\cdots \\times1}\\)に対して，ベクトル\\(\\{\\boldsymbol{a}_{1},\\boldsymbol{a}_{2},\\cdots,\\boldsymbol{a}_{N}\\}\\)を逐次的に外積する.\n\n\n\n\n\n\nNote\n\n\n\n外積：ベクトルを並べる操作\nつまり，バラバラの状態の\\(\\{\\boldsymbol{a}_{1},\\boldsymbol{a}_{2},\\cdots,\\boldsymbol{a}_{N}\\}\\)を並べると，\\(\\boldsymbol{a}_{1}\\circ\\boldsymbol{a}_{2}\\circ\\cdots\\boldsymbol{a}_{N}\\)になる.\n\n\n⇒TMallを使う\n\n外積なのに何故？\n\n　\\(\\mathbf{\\mathcal{X}}\\)と\\(\\{\\boldsymbol{a}\\}\\)の全モード積をとっているとも考えられるから\n\n\n\n\\(N\\)階テンソル\\(\\mathbf{\\mathcal{X}}\\)について\n\n\\(N\\)個のベクトルの外積と捉える\n\n\n\n\\(\\mathbf{\\mathcal{X}}\\)のダイアグラム\n\n\n大きさ1のベクトル（スカラー）が\\(N\\)個\n全体で見るとスカラーなので脚は無し\n\n\n\n\\(\\mathbf{\\mathcal{X}}\\)のダイアグラム\n\n\n\n\\(N\\)個のベクトル\\(\\{\\boldsymbol{a}_{1},\\boldsymbol{a}_{2},\\cdots,\\boldsymbol{a}_{N}\\}\\)について\n\nベクトルが\\(N\\)個.\nまだ並んではいない\n\n\n\n\\(\\boldsymbol{a}_{n}\\)\n\n\n\n\n\\(\\mathbf{\\mathcal{X}}\\)と\\(\\{\\boldsymbol{a}\\}\\)の全モード積\n\n\n\n全モード積のイメージ\n\n\n\n\n\n\n\n\nNote\n\n\n\nQ. どこを繋げるのか.\nA.サイズ1の脚（mode）どうし     ベクトルはサイズ\\((I_{n}\\times1)\\)スカラーはサイズ1と考える\n\n\n\nベクトル（左）スカラー（右） サイズ1の脚（赤色）\n\n\n\n\n  サイズ1の脚どうしを繋ぐと\n       ベクトルになった\n\n\n\n  ランク１テンソルの完成！ \n\n\n\n\n⇒TMall"
+  },
+  {
+    "objectID": "R1D.html#r1d関数を使わずにランク1テンソルを作成",
+    "href": "R1D.html#r1d関数を使わずにランク1テンソルを作成",
+    "title": "R1D",
+    "section": "R1D関数を使わずにランク1テンソルを作成",
+    "text": "R1D関数を使わずにランク1テンソルを作成\n\n\n[1] \"E:/home/ryoke/workspace/R/テンソルデータ解析の基礎と応用/test\"\n\n\n\n1. 要素が1のテンソルを作成\n3階テンソル\\(\\mathbf{\\mathcal{G}}\\in\\mathbb{R}^{1\\times1\\times1}\\)\n\nnRank &lt;- 3\n\nshape &lt;- rep(1,nRank)\n\nG &lt;- array(1  ## 全要素1\n           ,shape)\n\n最初に階数nRankを設定\nサイズshapeは、1を階数個分繰り返す\n\n計算用のオブジェクトにコピー\n\nX &lt;- G\n\n\n\n確認\n\n要素1の\\(\\mathbf{\\mathcal{X}}\\in\\mathbb{R}^{1\\times1\\times1}\\)\n\n\nprint(X)\n\n, , 1\n\n     [,1]\n[1,]    1\n\n\n\nサイズが\\((1\\times1\\times1)\\)\n\n\nprint(shape)\n\n[1] 1 1 1\n\n\n\n\n\n2. ベクトルのリストを作成\nベクトルの集合\\(\\{\\boldsymbol{a}\\}\\)\n行列型で作成する\n\n領域確保\n\nlistA &lt;- NULL\n\n\n\nlistAにベクトルを格納していく\n\nfor(n in c(1:nRank)){\n  le &lt;- n+1  ## ベクトルごとに列数を変える\n  \n  ## 行列型で生成\n  ## 要素の値も確認したいので，簡単な要素にした。2025/04/17\n  A_n &lt;- matrix(c(1:le) \n               , ncol = 1)  \n  \n  listA[[n]] &lt;- A_n\n}\n\n\n\n確認\n\nprint(listA)\n\n[[1]]\n     [,1]\n[1,]    1\n[2,]    2\n\n[[2]]\n     [,1]\n[1,]    1\n[2,]    2\n[3,]    3\n\n[[3]]\n     [,1]\n[1,]    1\n[2,]    2\n[3,]    3\n[4,]    4\n\n\n\n\n\n3. テンソルにベクトルを外積していく\nテンソル\\(\\mathbf{\\mathcal{X}}\\)と\\(\\{\\boldsymbol{a}\\}\\)\n\nX1 &lt;-  TMall(Tensor = X\n             , listA = listA\n             , .isDebug = TRUE)\n\n[1] 3\n[1] 1 1 1\n     [,1]\n[1,]    1\n[2,]    2\n[1] 1 1 1\n[1] 2\n[1] 2 1\n[1] 1 1\n[1] 2 1\n     [,1]\n[1,]    1\n[2,]    2\n[3,]    3\n[1] 2 1 1\n[1] 3\n[1] 3 1\n[1] 1 2\n[1] 3 2\n     [,1]\n[1,]    1\n[2,]    2\n[3,]    3\n[4,]    4\n[1] 2 3 1\n[1] 4\n[1] 4 1\n[1] 1 6\n[1] 4 6\n\n\n\n確認\n\nprint(X1)\n\n, , 1\n\n     [,1] [,2] [,3]\n[1,]    1    2    3\n[2,]    2    4    6\n\n, , 2\n\n     [,1] [,2] [,3]\n[1,]    2    4    6\n[2,]    4    8   12\n\n, , 3\n\n     [,1] [,2] [,3]\n[1,]    3    6    9\n[2,]    6   12   18\n\n, , 4\n\n     [,1] [,2] [,3]\n[1,]    4    8   12\n[2,]    8   16   24\n\ndim(X1)\n\n[1] 2 3 4\n\n\nX1のサイズがlistAの各要素のサイズと一致"
+  },
+  {
+    "objectID": "R1D.html#r1d関数のコード",
+    "href": "R1D.html#r1d関数のコード",
+    "title": "R1D",
+    "section": "R1D関数のコード",
+    "text": "R1D関数のコード\n\n# R1D関数  ---------------------------------------------------------------------\n\nR1D &lt;- function(listA){\n  \n  ## 因子ベクトル{lista}の個数\n  N &lt;- length(listA)\n  \n  ## N階テンソルX1の作成\n  X1 &lt;- array(1,rep(1,N))\n  \n  ## X1と{a}の全モード積を計算\n  X &lt;- TMall(X1,listA)\n  \n  return(X)\n}\n\n\n引数：ベクトル\\(\\{\\boldsymbol{a}\\}\\)（ベクトル（行列型）のリスト）\nN階テンソル\\(\\mathbf{\\mathcal{X}}\\in\\mathbb{R}^{1\\times1\\times \\cdots \\times1}\\)は，関数内で生成した. （関数外の方が良い？）\n\nサイズ（shape）:rep(1,N)1をN回繰り返す."
+  },
+  {
+    "objectID": "R1D.html#r1d関数を使ってランク１テンソルを作成",
+    "href": "R1D.html#r1d関数を使ってランク１テンソルを作成",
+    "title": "R1D",
+    "section": "R1D関数を使ってランク１テンソルを作成",
+    "text": "R1D関数を使ってランク１テンソルを作成\n引数:listA\n\n\n[[1]]\n     [,1]\n[1,]    1\n[2,]    2\n\n[[2]]\n     [,1]\n[1,]    1\n[2,]    2\n[3,]    3\n\n[[3]]\n     [,1]\n[1,]    1\n[2,]    2\n[3,]    3\n[4,]    4\n\n\n\nX2 &lt;- R1D(listA = listA)\n\n\n確認\n\ndim(X2)\n\n[1] 2 3 4\n\n\n\n\n同一性の確認\n\nall.equal(X1,X2)\n\n[1] TRUE\n\n\n⇒R1D関数は正しく動いた."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "miu-research",
+    "section": "",
+    "text": "ようこそ！\nこちら をクリックして、研究ページへどうぞ！"
+  }
+]

@@ -1,5 +1,8 @@
 project:
   title: "miu-research"
+  type: website
+  output-dir: docs
+
 
 
 

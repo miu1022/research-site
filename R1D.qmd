@@ -8,8 +8,8 @@ format:
     toc: true
     toc-depth: 3
     code-fold: false
-##project:
-  ##output-dir: docs    
+project:
+  output-dir: docs    
 editor: visual
 ---
 
