@@ -1,5 +1,40 @@
 [
   {
+    "objectID": "TVloo.html",
+    "href": "TVloo.html",
+    "title": "TVloo",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "TVloo.html#quarto",
+    "href": "TVloo.html#quarto",
+    "title": "TVloo",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "TVloo.html#running-code",
+    "href": "TVloo.html#running-code",
+    "title": "TVloo",
+    "section": "Running Code",
+    "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\nsetwd(\"E:/home/ryoke/research-site\")\n\n##setwd(\"E:/home/yoshida/research/tetsuya-work/nmf-tensor/ref/book/テンソルネットワークの基礎と応用/to-students/workspace/R/tensor-analysis-basics/test\")\n\ngetwd()\n\n[1] \"E:/home/ryoke/research-site\"\n\n## ## ################################\nsource(\"../workspace/R/テンソルデータ解析の基礎と応用/fold-unfold.R\")\n\n##source(\"../workspace/R/テンソルデータ解析の基礎と応用/TMprod-TMall.R\")\nsource(\"../workspace/R/テンソルデータ解析の基礎と応用/TMprod.R\")\nsource(\"../workspace/R/テンソルデータ解析の基礎と応用/TMall.R\")\n\nsource(\"../workspace/R/テンソルデータ解析の基礎と応用/R1D.R\")\n\nsource(\"../workspace/R/テンソルデータ解析の基礎と応用/TVloo.R\")\n\nlibrary(Matrix) ## 2025/04/04\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
+  },
+  {
+    "objectID": "miu-research.html",
+    "href": "miu-research.html",
+    "title": "miu-research",
+    "section": "",
+    "text": "ようこそ！\nこちら をクリックして、研究ページへどうぞ！"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "miu-research",
+    "section": "",
+    "text": "ようこそ！\nこちら をクリックして、研究ページへどうぞ！"
+  },
+  {
     "objectID": "R1D.html",
     "href": "R1D.html",
     "title": "R1D",
@@ -40,40 +75,5 @@
     "title": "R1D",
     "section": "R1D関数を使ってランク１テンソルを作成",
     "text": "R1D関数を使ってランク１テンソルを作成\n引数:listA\n\n\n[[1]]\n     [,1]\n[1,]    1\n[2,]    2\n\n[[2]]\n     [,1]\n[1,]    1\n[2,]    2\n[3,]    3\n\n[[3]]\n     [,1]\n[1,]    1\n[2,]    2\n[3,]    3\n[4,]    4\n\n\n\nX2 &lt;- R1D(listA = listA)\n\n\n確認\n\ndim(X2)\n\n[1] 2 3 4\n\n\n\n\n同一性の確認\n\nall.equal(X1,X2)\n\n[1] TRUE\n\n\n⇒R1D関数は正しく動いた."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "miu-research",
-    "section": "",
-    "text": "ようこそ！\nこちら をクリックして、研究ページへどうぞ！"
-  },
-  {
-    "objectID": "miu-research.html",
-    "href": "miu-research.html",
-    "title": "miu-research",
-    "section": "",
-    "text": "ようこそ！\nこちら をクリックして、研究ページへどうぞ！"
-  },
-  {
-    "objectID": "TVloo.html",
-    "href": "TVloo.html",
-    "title": "TVloo",
-    "section": "",
-    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
-  },
-  {
-    "objectID": "TVloo.html#quarto",
-    "href": "TVloo.html#quarto",
-    "title": "TVloo",
-    "section": "",
-    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
-  },
-  {
-    "objectID": "TVloo.html#running-code",
-    "href": "TVloo.html#running-code",
-    "title": "TVloo",
-    "section": "Running Code",
-    "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\nsetwd(\"E:/home/ryoke/research-site\")\n\n##setwd(\"E:/home/yoshida/research/tetsuya-work/nmf-tensor/ref/book/テンソルネットワークの基礎と応用/to-students/workspace/R/tensor-analysis-basics/test\")\n\ngetwd()\n\n[1] \"E:/home/ryoke/research-site\"\n\n## ## ################################\nsource(\"../workspace/R/テンソルデータ解析の基礎と応用/fold-unfold.R\")\n\n##source(\"../workspace/R/テンソルデータ解析の基礎と応用/TMprod-TMall.R\")\nsource(\"../workspace/R/テンソルデータ解析の基礎と応用/TMprod.R\")\nsource(\"../workspace/R/テンソルデータ解析の基礎と応用/TMall.R\")\n\nsource(\"../workspace/R/テンソルデータ解析の基礎と応用/R1D.R\")\n\nsource(\"../workspace/R/テンソルデータ解析の基礎と応用/TVloo.R\")\n\nlibrary(Matrix) ## 2025/04/04\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
   }
 ]
