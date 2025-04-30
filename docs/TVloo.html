@@ -287,37 +287,37 @@ window.Quarto = {
 <pre><code>, , 1
 
      [,1] [,2] [,3] [,4]
-[1,]    5    3    1    3
-[2,]    4    1    2    2
-[3,]    3    5    2    5
+[1,]    5    2    3    1
+[2,]    4    5    2    5
+[3,]    2    4    1    2
 
 , , 2
 
      [,1] [,2] [,3] [,4]
-[1,]    3    2    4    3
-[2,]    1    4    5    5
-[3,]    3    1    1    2
+[1,]    5    2    4    2
+[2,]    1    4    1    3
+[3,]    4    2    2    3
 
 , , 3
 
      [,1] [,2] [,3] [,4]
-[1,]    1    3    5    3
-[2,]    3    4    4    2
-[3,]    1    4    1    3
+[1,]    2    4    2    2
+[2,]    3    2    3    1
+[3,]    1    3    4    3
 
 , , 4
 
      [,1] [,2] [,3] [,4]
-[1,]    1    4    3    1
-[2,]    4    5    3    4
-[3,]    1    3    1    5
+[1,]    5    5    3    4
+[2,]    2    4    5    1
+[3,]    5    2    4    1
 
 , , 5
 
      [,1] [,2] [,3] [,4]
-[1,]    4    2    4    1
-[2,]    5    2    1    4
-[3,]    2    3    4    3</code></pre>
+[1,]    4    3    1    4
+[2,]    3    3    4    3
+[3,]    4    1    2    1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>nRank <span class="ot">&lt;-</span> <span class="fu">length</span>(shape)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(nRank)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -349,24 +349,24 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
      [,1]
-[1,]    2
-[2,]    5
-[3,]    4
+[1,]    5
+[2,]    4
+[3,]    3
 
 [[2]]
      [,1]
-[1,]    2
+[1,]    4
 [2,]    2
-[3,]    4
-[4,]    5
+[3,]    5
+[4,]    3
 
 [[3]]
      [,1]
-[1,]    3
-[2,]    5
-[3,]    2
+[1,]    5
+[2,]    2
+[3,]    5
 [4,]    4
-[5,]    1</code></pre>
+[5,]    3</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -424,7 +424,7 @@ window.Quarto = {
 <pre><code>, , 1
 
      [,1] [,2] [,3] [,4]
-[1,]  428  523  442  561</code></pre>
+[1,]  766  737  629  545</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dim</span>(X1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -508,7 +508,7 @@ loopの範囲
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># TVloo -------------------------------------------------------------------</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>TVloo <span class="ot">&lt;-</span> <span class="cf">function</span>(Tensor</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                  ,listA</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                  , listMatrix</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                  , modeID  <span class="do">## k番目のベクトルを取り除く</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                  , <span class="at">.isDebug =</span> <span class="cn">FALSE</span></span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                  ){</span>
@@ -518,7 +518,7 @@ loopの範囲
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  shapeA <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>nRank)){</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    A_i <span class="ot">&lt;-</span> listA[[i]]</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    A_i <span class="ot">&lt;-</span> listMatrix[[i]]</span>
 <span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="do">## 転置している</span></span>
 <span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    shapeA <span class="ot">&lt;-</span> <span class="fu">c</span>(shapeA, <span class="fu">nrow</span>(A_i))</span>
 <span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  }</span>
@@ -542,7 +542,7 @@ loopの範囲
 <span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>  <span class="do">## k番目を取り除いてループ</span></span>
 <span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (n <span class="cf">in</span> loop ) {</span>
 <span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>    <span class="do">## listA から行列を取得し，転置</span></span>
-<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>    A_n <span class="ot">&lt;-</span> <span class="fu">t</span>(listA[[n]])</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>    A_n <span class="ot">&lt;-</span> <span class="fu">t</span>(listMatrix[[n]])</span>
 <span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>    Tensor_new <span class="ot">&lt;-</span> <span class="fu">TMprod</span>(<span class="at">Tensor =</span> Tensor_new</span>
 <span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>                         , <span class="at">Matrix =</span> A_n</span>
@@ -571,7 +571,7 @@ loopの範囲
 <h3 class="anchored" data-anchor-id="引数">引数</h3>
 <ul>
 <li><p>Tensor</p></li>
-<li><p>listA</p></li>
+<li><p>listMatrix(2025/04/25 listAから変更)</p></li>
 <li><p>modeID<br> 積をとらないモード番号（<span class="math inline">\(k\)</span>）</p></li>
 </ul>
 </section>
@@ -619,7 +619,7 @@ loopの範囲
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>X4 <span class="ot">&lt;-</span> <span class="fu">TVloo</span>(<span class="at">Tensor =</span> X</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>            , <span class="at">listA =</span> listA</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>            , <span class="at">listMatrix =</span> listA</span>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>            , <span class="at">modeID =</span> k</span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>            , <span class="at">.isDebug =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -655,7 +655,7 @@ loopの範囲
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">1</span></span>
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>X5 <span class="ot">&lt;-</span> <span class="fu">TVloo</span>(<span class="at">Tensor =</span> X</span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>            , <span class="at">listA =</span> listA</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>            , <span class="at">listMatrix =</span> listA</span>
 <span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>            , <span class="at">modeID =</span> k</span>
 <span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>            , <span class="at">.isDebug =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -686,7 +686,7 @@ loopの範囲
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> nRank</span>
 <span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>X6 <span class="ot">&lt;-</span> <span class="fu">TVloo</span>(<span class="at">Tensor =</span> X</span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>            , <span class="at">listA =</span> listA</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>            , <span class="at">listMatrix =</span> listA</span>
 <span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>            , <span class="at">modeID =</span> k</span>
 <span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>            , <span class="at">.isDebug =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
