@@ -1,0 +1,79 @@
+[
+  {
+    "objectID": "TVloo.html",
+    "href": "TVloo.html",
+    "title": "TVloo",
+    "section": "",
+    "text": "テンソル\\(\\mathbf{\\mathcal{X}}\\)と，ベクトル\\(\\{\\boldsymbol{a}_{1},\\boldsymbol{a}_{2},\\cdots,\\boldsymbol{a}_{N}\\}\\)から１つのベクトル\\(\\boldsymbol{a}_{k}\\)を除いた\\(\\left\\{\\begin{array}{ccc}\\boldsymbol{a}_{1}&\\cdots&\\boldsymbol{a}_{k-1}&\\boldsymbol{a}_{k+1}&\\cdots&\\boldsymbol{a}_{N}\\end{array}\\right\\}\\)との縮約をとる関数.\n\n\n\nTVlooのイメージ\n\n\n\n\n\n\n\\(k\\)-modeのみが残る\n\n\n\n\n\\[\n\\boldsymbol{\\mathrm{X}}_{(k)}(\\boldsymbol{a}_{N}\\otimes\\cdots \\otimes\\boldsymbol{a}_{k-1}\\otimes\\boldsymbol{a}_{k+1}\\otimes\\cdots\\otimes\\boldsymbol{a}_{1} )\n\\]\n\n\\(\\boldsymbol{a}_{N}\\otimes\\cdots \\otimes\\boldsymbol{a}_{k-1}\\otimes\\boldsymbol{a}_{k+1}\\otimes\\cdots\\otimes\\boldsymbol{a}_{1} = vec(\\boldsymbol{a}_{1}\\circ \\cdots\\circ\\boldsymbol{a}_{k-1}\\circ\\boldsymbol{a}_{k+1}\\circ\\cdots\\circ\\boldsymbol{a}_{N})\\) \n\n\n\n第\\(k\\)モード行列展開することで，第\\(k\\)モード以外のモードを第2モードにまとめることができる.\nベクトルのクロネッカー積によって，まとめに1つのベクトルに.\n2つの行列積をとると第\\(k\\)モードだけ残る."
+  },
+  {
+    "objectID": "TVloo.html#関数なしver",
+    "href": "TVloo.html#関数なしver",
+    "title": "TVloo",
+    "section": "関数なしVer",
+    "text": "関数なしVer\n関数を使わずに，第\\(k\\)モードを除外して，テンソル\\(\\mathbf{\\mathcal{X}}\\)とベクトルの集合\\(\\{\\boldsymbol{a}\\}\\)の積をとる\n\n準備\n\\(3\\)階テンソル\\(\\mathbf{\\mathcal{G}}\\in\\mathbb{R}^{3\\times4\\times5}\\)\n\n## ## ##### サイズ(3,4,5)の3階テンソルを作成\n\n## サイズを指定\nshape &lt;- c(3,4,5)\n\nG &lt;- array(sample(1:5\n                  , 60\n                  , replace = TRUE)\n           ,shape)\n\nX &lt;- G  ## コピー\nprint(X)\n\n, , 1\n\n     [,1] [,2] [,3] [,4]\n[1,]    5    3    1    3\n[2,]    4    1    2    2\n[3,]    3    5    2    5\n\n, , 2\n\n     [,1] [,2] [,3] [,4]\n[1,]    3    2    4    3\n[2,]    1    4    5    5\n[3,]    3    1    1    2\n\n, , 3\n\n     [,1] [,2] [,3] [,4]\n[1,]    1    3    5    3\n[2,]    3    4    4    2\n[3,]    1    4    1    3\n\n, , 4\n\n     [,1] [,2] [,3] [,4]\n[1,]    1    4    3    1\n[2,]    4    5    3    4\n[3,]    1    3    1    5\n\n, , 5\n\n     [,1] [,2] [,3] [,4]\n[1,]    4    2    4    1\n[2,]    5    2    1    4\n[3,]    2    3    4    3\n\nnRank &lt;- length(shape)\nprint(nRank)\n\n[1] 3\n\n\nベクトルの集合\\(\\{\\boldsymbol{a}\\}\\)\n\n## ## ##### ベクトルのリストを作成\n\n## 領域確保\nlistA &lt;- NULL\n\n## nRank（Gの階数）分の要素を作成\nfor (n in c(1:nRank)) {\n  \n  A_n &lt;- matrix(sample(1:5\n                       ,dim(G)[n]　## 第1モードサイズ\n                       , replace = TRUE\n                       )\n                , ncol = 1)　## 第2モード(列)サイズは1\n  \n  ## listAのn番目の要素として，ベクトルA_nを格納\n  listA[[n]] &lt;- A_n\n}\n\nprint(listA)\n\n[[1]]\n     [,1]\n[1,]    2\n[2,]    5\n[3,]    4\n\n[[2]]\n     [,1]\n[1,]    2\n[2,]    2\n[3,]    4\n[4,]    5\n\n[[3]]\n     [,1]\n[1,]    3\n[2,]    5\n[3,]    2\n[4,]    4\n[5,]    1\n\n\n\n## liatAのサイズを格納するオブジェクト（縮退防止用？）\nshapeA &lt;- NULL  ## 領域確保\n\n## listAの各ベクトルのサイズをshapeAに保存\nfor(i in c(1:nRank)){\n  \n  A_i &lt;- listA[[i]]\n  \n  shapeA &lt;- c(shapeA\n              , nrow(A_i))\n}\n\n\n## 同一性の確認\n## 積をとる前のテンソルXのサイズと{A}の各ベクトルのサイズは一致\nall.equal(shapeA\n          , dim(X))\n\n[1] TRUE\n\n\n\n\nTVlooを計算（関数無し）\n除外するモード：\\(k\\)\n\n\\(k = 2\\)のとき\n\n## k番目を除外してそれぞれ第nモード積をとる\n\nk &lt;- 2 \n\nfor(n in c( 1:(k-1), (k+1):nRank )){\n  \n  A_n &lt;- t(listA[[n]])\n  \n  X &lt;- TMprod(Tensor = X\n              , Matrix = A_n\n              , modeID = n\n              )\n  \n  print(dim(X))\n}\n\n[1] 1 4 5\n[1] 1 4 1\n\n## ## ##### 2025/04/24\nX1 &lt;- X　## 保存\nprint(X1)\n\n, , 1\n\n     [,1] [,2] [,3] [,4]\n[1,]  428  523  442  561\n\nprint(dim(X1))\n\n[1] 1 4 1\n\n\n\n\n\\(k=1\\)のとき\n\n## ## ####### k = 1 の場合\n\nX &lt;- G ## 戻す\n\nk &lt;- 1\n\nfor(n in c(2:nRank)){\n  \n  A_n &lt;- t(listA[[n]])\n  \n  X &lt;- TMprod(Tensor = X\n              , Matrix = A_n\n              , modeID = n\n  )\n  \n}\n\nX2 &lt;- X\nprint(dim(X2))\n\n[1] 3 1 1\n\n\n\n\n\\(k=nRank(3)\\)のとき\n\n## ## ##### k = nRank の場合\n\nX &lt;- G\n\nk &lt;- nRank\n\nfor(n in c(1:(nRank-1))){\n  \n  A_n &lt;- t(listA[[n]])\n  \n  X &lt;- TMprod(Tensor = X\n              , Matrix = A_n\n              , modeID = n\n  )\n}\n\nX3 &lt;- X\nprint(dim(X3))\n\n[1] 1 1 5\n\n\n\n\n\n\n\n\nloopの範囲\n\n\n\nloopの範囲を場合分けする必要がある\n\\(k = 1\\)のとき 2:nRank  \\(k = nRank\\)のとき 1:(nRank-1)  それ以外 1:(k-1), (k+1):nRank"
+  },
+  {
+    "objectID": "TVloo.html#tvloo関数",
+    "href": "TVloo.html#tvloo関数",
+    "title": "TVloo",
+    "section": "TVloo関数",
+    "text": "TVloo関数\n\nコードの全体\n\n# TVloo -------------------------------------------------------------------\nTVloo &lt;- function(Tensor\n                  ,listA\n                  , modeID  ## k番目のベクトルを取り除く\n                  , .isDebug = FALSE\n                  ){\n  shape &lt;- dim(Tensor)\n  nRank &lt;- length(shape)\n  \n  shapeA &lt;- NULL\n  \n  for(i in c(1:nRank)){\n    A_i &lt;- listA[[i]]\n    ## 転置している\n    shapeA &lt;- c(shapeA, nrow(A_i))\n  }\n  \n  \n  ## 逐次更新するテンソルとshapeを作成\n  Tensor_new &lt;- Tensor\n  shape_new &lt;- shapeA\n  \n  ## 2025/04/24，kによって場合分け\n  ## loopにループ範囲を格納\n  if(k == 1){\n    loop &lt;- c(2:nRank)\n  }else if(k == nRank){\n    loop &lt;- c(1:(nRank-1))\n  }else{\n    loop &lt;- c(1:(k-1), (k+1):nRank)\n  }\n  \n  \n  ## k番目を取り除いてループ\n  for (n in loop ) {\n    ## listA から行列を取得し，転置\n    A_n &lt;- t(listA[[n]])\n    \n    Tensor_new &lt;- TMprod(Tensor = Tensor_new\n                         , Matrix = A_n\n                         , modeID = n\n                         , shape = shape_new\n                         , .isDebug = .isDebug\n    )\n    ## shapeを更新\n    shape_new &lt;- dim( Tensor_new )\n  }\n  \n  return(Tensor_new)\n}\n\n\n\n\n\n\n\nコードについてのメモ\n\n\n\n\n引数\n\nTensor\nlistA\nmodeID 積をとらないモード番号（\\(k\\)）\n\n\n\nshape\n\nshapeA &lt;- NULL\n  \n  for(i in c(1:nRank)){\n    A_i &lt;- listA[[i]]\n    ## 転置している\n    shapeA &lt;- c(shapeA, nrow(A_i))\n  }\n\nshapeAには，Aの行数を格納\n\n\nkの場合分け\nloopに範囲を格納→forの引数\n\n## 2025/04/24，kによって場合分け\n  ## loopにループ範囲を格納\n  if(k == 1){\n    loop &lt;- c(2:nRank)\n  }else if(k == nRank){\n    loop &lt;- c(1:(nRank-1))\n  }else{\n    loop &lt;- c(1:(k-1), (k+1):nRank)\n  }"
+  },
+  {
+    "objectID": "TVloo.html#tvloo関数のテスト",
+    "href": "TVloo.html#tvloo関数のテスト",
+    "title": "TVloo",
+    "section": "TVloo関数のテスト",
+    "text": "TVloo関数のテスト\n\n\\(k=2\\)のとき\n\n## TVloo関数を使って計算\n\nX &lt;- G  ## 戻す\n\nk &lt;- 2\n\nX4 &lt;- TVloo(Tensor = X\n            , listA = listA\n            , modeID = k\n            , .isDebug = TRUE)\n\n[1] 3 4 5\n[1] 1\n[1] 1 3\n[1]  3 20\n[1]  1 20\n[1] 1 4 5\n[1] 1\n[1] 1 5\n[1] 5 4\n[1] 1 4\n\nprint(dim(X4))\n\n[1] 1 4 1\n\n## 同一性の確認\nall.equal(X1,X4)\n\n[1] TRUE\n\n\n\n\n\\(k=1,nRank\\)のとき\n\n## ## ##### k = 1のとき\n\nX &lt;- G  ## 戻す\n\nk &lt;- 1\n\nX5 &lt;- TVloo(Tensor = X\n            , listA = listA\n            , modeID = k\n            , .isDebug = TRUE)\n\n[1] 3 4 5\n[1] 1\n[1] 1 4\n[1]  4 15\n[1]  1 15\n[1] 3 1 5\n[1] 1\n[1] 1 5\n[1] 5 3\n[1] 1 3\n\nprint(dim(X5))\n\n[1] 3 1 1\n\n## 同一性の確認\nall.equal(X2,X5)\n\n[1] TRUE\n\n## ## ##### k = nRankのとき\n\nX &lt;- G  ## 戻す\n\nk &lt;- nRank\n\nX6 &lt;- TVloo(Tensor = X\n            , listA = listA\n            , modeID = k\n            , .isDebug = TRUE)\n\n[1] 3 4 5\n[1] 1\n[1] 1 3\n[1]  3 20\n[1]  1 20\n[1] 1 4 5\n[1] 1\n[1] 1 4\n[1] 4 5\n[1] 1 5\n\nprint(dim(X6))\n\n[1] 1 1 5\n\n## 同一性の確認\nall.equal(X3,X6)\n\n[1] TRUE\n\n\n2025/04/24:全ての場合で正しく関数が動いたことを確認"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "miu-research",
+    "section": "",
+    "text": "ようこそ！\nこちら をクリックして、研究ページへどうぞ！"
+  },
+  {
+    "objectID": "R1D.html",
+    "href": "R1D.html",
+    "title": "R1D",
+    "section": "",
+    "text": "N個のベクトルの外積\n\\[\n\\boldsymbol{a}_{1}\\circ\\boldsymbol{a}_{2}\\circ\\cdots\\boldsymbol{a}_{N}\n\\]\n\n\n\nランク1テンソルのダイアグラム表示\n\n\n\n\n\n要素1のN階テンソル\\(\\mathbf{\\mathcal{X}}\\in\\mathbb{R}^{1\\times1\\times \\cdots \\times1}\\)に対して，ベクトル\\(\\{\\boldsymbol{a}_{1},\\boldsymbol{a}_{2},\\cdots,\\boldsymbol{a}_{N}\\}\\)を逐次的に外積する.\n\n\n\n\n\n\nNote\n\n\n\n外積：ベクトルを並べる操作\nつまり，バラバラの状態の\\(\\{\\boldsymbol{a}_{1},\\boldsymbol{a}_{2},\\cdots,\\boldsymbol{a}_{N}\\}\\)を並べると，\\(\\boldsymbol{a}_{1}\\circ\\boldsymbol{a}_{2}\\circ\\cdots\\boldsymbol{a}_{N}\\)になる.\n\n\n⇒TMallを使う\n\n外積なのに何故？\n\n　\\(\\mathbf{\\mathcal{X}}\\)と\\(\\{\\boldsymbol{a}\\}\\)の全モード積をとっているとも考えられるから\n\n\n\n\\(N\\)階テンソル\\(\\mathbf{\\mathcal{X}}\\)について\n\n\\(N\\)個のベクトルの外積と捉える\n\n\n\n\\(\\mathbf{\\mathcal{X}}\\)のダイアグラム\n\n\n大きさ1のベクトル（スカラー）が\\(N\\)個\n全体で見るとスカラーなので脚は無し\n\n\n\n\\(\\mathbf{\\mathcal{X}}\\)のダイアグラム\n\n\n\n\\(N\\)個のベクトル\\(\\{\\boldsymbol{a}_{1},\\boldsymbol{a}_{2},\\cdots,\\boldsymbol{a}_{N}\\}\\)について\n\nベクトルが\\(N\\)個.\nまだ並んではいない\n\n\n\n\\(\\boldsymbol{a}_{n}\\)\n\n\n\n\n\\(\\mathbf{\\mathcal{X}}\\)と\\(\\{\\boldsymbol{a}\\}\\)の全モード積\n\n\n\n全モード積のイメージ\n\n\n\n\n\n\n\n\nNote\n\n\n\nQ. どこを繋げるのか.\nA.サイズ1の脚（mode）どうし     ベクトルはサイズ\\((I_{n}\\times1)\\)スカラーはサイズ1と考える\n\n\n\nベクトル（左）スカラー（右） サイズ1の脚（赤色）\n\n\n\n\n  サイズ1の脚どうしを繋ぐと\n       ベクトルになった\n\n\n\n  ランク１テンソルの完成！ \n\n\n\n\n⇒TMall"
+  },
+  {
+    "objectID": "R1D.html#ランク1テンソル",
+    "href": "R1D.html#ランク1テンソル",
+    "title": "R1D",
+    "section": "",
+    "text": "N個のベクトルの外積\n\\[\n\\boldsymbol{a}_{1}\\circ\\boldsymbol{a}_{2}\\circ\\cdots\\boldsymbol{a}_{N}\n\\]\n\n\n\nランク1テンソルのダイアグラム表示"
+  },
+  {
+    "objectID": "R1D.html#ランク1テンソルの作成方法",
+    "href": "R1D.html#ランク1テンソルの作成方法",
+    "title": "R1D",
+    "section": "",
+    "text": "要素1のN階テンソル\\(\\mathbf{\\mathcal{X}}\\in\\mathbb{R}^{1\\times1\\times \\cdots \\times1}\\)に対して，ベクトル\\(\\{\\boldsymbol{a}_{1},\\boldsymbol{a}_{2},\\cdots,\\boldsymbol{a}_{N}\\}\\)を逐次的に外積する.\n\n\n\n\n\n\nNote\n\n\n\n外積：ベクトルを並べる操作\nつまり，バラバラの状態の\\(\\{\\boldsymbol{a}_{1},\\boldsymbol{a}_{2},\\cdots,\\boldsymbol{a}_{N}\\}\\)を並べると，\\(\\boldsymbol{a}_{1}\\circ\\boldsymbol{a}_{2}\\circ\\cdots\\boldsymbol{a}_{N}\\)になる.\n\n\n⇒TMallを使う\n\n外積なのに何故？\n\n　\\(\\mathbf{\\mathcal{X}}\\)と\\(\\{\\boldsymbol{a}\\}\\)の全モード積をとっているとも考えられるから\n\n\n\n\\(N\\)階テンソル\\(\\mathbf{\\mathcal{X}}\\)について\n\n\\(N\\)個のベクトルの外積と捉える\n\n\n\n\\(\\mathbf{\\mathcal{X}}\\)のダイアグラム\n\n\n大きさ1のベクトル（スカラー）が\\(N\\)個\n全体で見るとスカラーなので脚は無し\n\n\n\n\\(\\mathbf{\\mathcal{X}}\\)のダイアグラム\n\n\n\n\\(N\\)個のベクトル\\(\\{\\boldsymbol{a}_{1},\\boldsymbol{a}_{2},\\cdots,\\boldsymbol{a}_{N}\\}\\)について\n\nベクトルが\\(N\\)個.\nまだ並んではいない\n\n\n\n\\(\\boldsymbol{a}_{n}\\)\n\n\n\n\n\\(\\mathbf{\\mathcal{X}}\\)と\\(\\{\\boldsymbol{a}\\}\\)の全モード積\n\n\n\n全モード積のイメージ\n\n\n\n\n\n\n\n\nNote\n\n\n\nQ. どこを繋げるのか.\nA.サイズ1の脚（mode）どうし     ベクトルはサイズ\\((I_{n}\\times1)\\)スカラーはサイズ1と考える\n\n\n\nベクトル（左）スカラー（右） サイズ1の脚（赤色）\n\n\n\n\n  サイズ1の脚どうしを繋ぐと\n       ベクトルになった\n\n\n\n  ランク１テンソルの完成！ \n\n\n\n\n⇒TMall"
+  },
+  {
+    "objectID": "R1D.html#r1d関数を使わずにランク1テンソルを作成",
+    "href": "R1D.html#r1d関数を使わずにランク1テンソルを作成",
+    "title": "R1D",
+    "section": "R1D関数を使わずにランク1テンソルを作成",
+    "text": "R1D関数を使わずにランク1テンソルを作成\n\n\n[1] \"E:/home/ryoke/research-site\"\n\n\n\n1. 要素が1のテンソルを作成\n3階テンソル\\(\\mathbf{\\mathcal{G}}\\in\\mathbb{R}^{1\\times1\\times1}\\)\n\nnRank &lt;- 3\n\nshape &lt;- rep(1,nRank)\n\nG &lt;- array(1  ## 全要素1\n           ,shape)\n\n最初に階数nRankを設定\nサイズshapeは、1を階数個分繰り返す\n\n計算用のオブジェクトにコピー\n\nX &lt;- G\n\n\n\n確認\n\n要素1の\\(\\mathbf{\\mathcal{X}}\\in\\mathbb{R}^{1\\times1\\times1}\\)\n\n\nprint(X)\n\n, , 1\n\n     [,1]\n[1,]    1\n\n\n\nサイズが\\((1\\times1\\times1)\\)\n\n\nprint(shape)\n\n[1] 1 1 1\n\n\n\n\n\n2. ベクトルのリストを作成\nベクトルの集合\\(\\{\\boldsymbol{a}\\}\\)\n行列型で作成する\n\n領域確保\n\nlistMatrix &lt;- NULL\n\n\n\nlistMatrixにベクトルを格納していく\n\nfor(n in c(1:nRank)){\n  le &lt;- n+1  ## ベクトルごとに列数を変える\n  \n  ## 行列型で生成\n  ## 要素の値も確認したいので，簡単な要素にした。2025/04/17\n  A_n &lt;- matrix(c(1:le) \n               , ncol = 1)  \n  \n  listMatrix[[n]] &lt;- A_n\n}\n\n\n\n確認\n\nprint(listMatrix)\n\n[[1]]\n     [,1]\n[1,]    1\n[2,]    2\n\n[[2]]\n     [,1]\n[1,]    1\n[2,]    2\n[3,]    3\n\n[[3]]\n     [,1]\n[1,]    1\n[2,]    2\n[3,]    3\n[4,]    4\n\n\n\n\n\n3. テンソルにベクトルを外積していく\nテンソル\\(\\mathbf{\\mathcal{X}}\\)と\\(\\{\\boldsymbol{a}\\}\\)\n\nX1 &lt;-  TMall(Tensor = X\n             , listMatrix = listMatrix\n             , .isDebug = TRUE)\n\n[1] 3\n[1] 1 1 1\n     [,1]\n[1,]    1\n[2,]    2\n[1] 1 1 1\n[1] 2\n[1] 2 1\n[1] 1 1\n[1] 2 1\n     [,1]\n[1,]    1\n[2,]    2\n[3,]    3\n[1] 2 1 1\n[1] 3\n[1] 3 1\n[1] 1 2\n[1] 3 2\n     [,1]\n[1,]    1\n[2,]    2\n[3,]    3\n[4,]    4\n[1] 2 3 1\n[1] 4\n[1] 4 1\n[1] 1 6\n[1] 4 6\n\n\n\n確認\n\nprint(X1)\n\n, , 1\n\n     [,1] [,2] [,3]\n[1,]    1    2    3\n[2,]    2    4    6\n\n, , 2\n\n     [,1] [,2] [,3]\n[1,]    2    4    6\n[2,]    4    8   12\n\n, , 3\n\n     [,1] [,2] [,3]\n[1,]    3    6    9\n[2,]    6   12   18\n\n, , 4\n\n     [,1] [,2] [,3]\n[1,]    4    8   12\n[2,]    8   16   24\n\ndim(X1)\n\n[1] 2 3 4\n\n\nX1のサイズがlistMatrixの各要素のサイズと一致"
+  },
+  {
+    "objectID": "R1D.html#r1d関数のコード",
+    "href": "R1D.html#r1d関数のコード",
+    "title": "R1D",
+    "section": "R1D関数のコード",
+    "text": "R1D関数のコード\n\n# R1D関数  ---------------------------------------------------------------------\n\nR1D &lt;- function(listMatrix){\n  \n  ## 因子ベクトル{lista}の個数\n  N &lt;- length(listMatrix)\n  \n  ## N階テンソルX1の作成\n  X1 &lt;- array(1,rep(1,N))\n  \n  ## X1と{a}の全モード積を計算\n  X &lt;- TMall(Tensor=X1\n             , listMatrix = listMatrix)\n  \n  return(X)\n}\n\n\n引数：ベクトル\\(\\{\\boldsymbol{a}\\}\\)（ベクトル（行列型）のリスト）\nN階テンソル\\(\\mathbf{\\mathcal{X}}\\in\\mathbb{R}^{1\\times1\\times \\cdots \\times1}\\)は，関数内で生成した. （関数外の方が良い？）\n\nサイズ（shape）:rep(1,N)1をN回繰り返す."
+  },
+  {
+    "objectID": "R1D.html#r1d関数を使ってランク１テンソルを作成",
+    "href": "R1D.html#r1d関数を使ってランク１テンソルを作成",
+    "title": "R1D",
+    "section": "R1D関数を使ってランク１テンソルを作成",
+    "text": "R1D関数を使ってランク１テンソルを作成\n引数:listMatrix\n\n\n[[1]]\n     [,1]\n[1,]    1\n[2,]    2\n\n[[2]]\n     [,1]\n[1,]    1\n[2,]    2\n[3,]    3\n\n[[3]]\n     [,1]\n[1,]    1\n[2,]    2\n[3,]    3\n[4,]    4\n\n\n\nX2 &lt;- R1D(listMatrix = listMatrix)\n\n\n確認\n\ndim(X2)\n\n[1] 2 3 4\n\n\n\n\n同一性の確認\n\nall.equal(X1,X2)\n\n[1] TRUE\n\n\n⇒R1D関数は正しく動いた."
+  }
+]
