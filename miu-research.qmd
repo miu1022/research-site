@@ -1,8 +1,0 @@
----
-title: "miu-research"
-format: html
----
-
-# ようこそ！
-
-[こちら](R1D.html) をクリックして、研究ページへどうぞ！

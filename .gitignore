@@ -12,8 +12,7 @@ AppData/
 *.log
 *.tmp
 
-echo NTUSER.DAT >> .gitignore
-echo ntuser.dat.* >> .gitignore
+
 
 # Windowsシステムファイル
 NTUSER.DAT
@@ -21,6 +20,8 @@ ntuser.*
 *.blf
 *.regtrans-ms
 ntuser.*
+
+Documents/GitHub/
 
 # ユーザーフォルダ
 Contacts/

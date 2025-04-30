@@ -100,19 +100,19 @@ A.サイズ1の脚（mode）どうし <br>    ベクトルはサイズ$(I_{n}
 ```{r}
 #| echo: false
 
-setwd("E:/home/ryoke/workspace/R/テンソルデータ解析の基礎と応用/test")
+setwd("E:/home/ryoke/research-site")
 
 ##setwd("E:/home/yoshida/research/tetsuya-work/nmf-tensor/ref/book/テンソルネットワークの基礎と応用/to-students/workspace/R/tensor-analysis-basics/test")
 
 getwd()
 
 ## ## ################################
-source("../fold-unfold.R")
+source("../workspace/R/テンソルデータ解析の基礎と応用/fold-unfold.R")
 
-source("../TMprod.R")
-source("../TMall.R")
+source("../workspace/R/テンソルデータ解析の基礎と応用/TMprod.R")
+source("../workspace/R/テンソルデータ解析の基礎と応用/TMall.R")
 
-source("../R1D.R")
+source("../workspace/R/テンソルデータ解析の基礎と応用/R1D.R")
 
 library(Matrix) 
 ```
@@ -163,10 +163,10 @@ print(shape)
 #### 領域確保
 
 ```{r}
-listA <- NULL
+listMatrix <- NULL
 ```
 
-#### `listA`にベクトルを格納していく
+#### `listMatrix`にベクトルを格納していく
 
 ```{r}
 for(n in c(1:nRank)){
@@ -177,14 +177,14 @@ for(n in c(1:nRank)){
   A_n <- matrix(c(1:le) 
                , ncol = 1)  
   
-  listA[[n]] <- A_n
+  listMatrix[[n]] <- A_n
 }
 ```
 
 #### 確認
 
 ```{r}
-print(listA)
+print(listMatrix)
 ```
 
 ### 3. テンソルにベクトルを外積していく
@@ -193,7 +193,7 @@ print(listA)
 
 ```{r}
 X1 <-  TMall(Tensor = X
-             , listA = listA
+             , listMatrix = listMatrix
              , .isDebug = TRUE)
 
 ```
@@ -205,23 +205,24 @@ print(X1)
 dim(X1)
 ```
 
-`X1`のサイズが`listA`の各要素のサイズと一致
+`X1`のサイズが`listMatrix`の各要素のサイズと一致
 
 ## R1D関数のコード
 
 ```{r}
 # R1D関数  ---------------------------------------------------------------------
 
-R1D <- function(listA){
+R1D <- function(listMatrix){
   
   ## 因子ベクトル{lista}の個数
-  N <- length(listA)
+  N <- length(listMatrix)
   
   ## N階テンソルX1の作成
   X1 <- array(1,rep(1,N))
   
   ## X1と{a}の全モード積を計算
-  X <- TMall(X1,listA)
+  X <- TMall(Tensor=X1
+             , listMatrix = listMatrix)
   
   return(X)
 }
@@ -235,15 +236,15 @@ R1D <- function(listA){
 
 ## R1D関数を使ってランク１テンソルを作成
 
-引数:`listA`
+引数:`listMatrix`
 
 ```{r}
 #| echo: false
-print(listA)
+print(listMatrix)
 ```
 
 ```{r}
-X2 <- R1D(listA = listA)
+X2 <- R1D(listMatrix = listMatrix)
 ```
 
 #### 確認

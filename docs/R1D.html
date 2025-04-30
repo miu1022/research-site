@@ -352,7 +352,7 @@ Note
 <h2 class="anchored" data-anchor-id="r1d関数を使わずにランク1テンソルを作成">R1D関数を使わずにランク1テンソルを作成</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "E:/home/ryoke/workspace/R/テンソルデータ解析の基礎と応用/test"</code></pre>
+<pre><code>[1] "E:/home/ryoke/research-site"</code></pre>
 </div>
 </div>
 <section id="要素が1のテンソルを作成" class="level3">
@@ -406,11 +406,11 @@ Note
 <section id="領域確保" class="level4">
 <h4 class="anchored" data-anchor-id="領域確保">領域確保</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>listA <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>listMatrix <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="listaにベクトルを格納していく" class="level4">
-<h4 class="anchored" data-anchor-id="listaにベクトルを格納していく"><code>listA</code>にベクトルを格納していく</h4>
+<section id="listmatrixにベクトルを格納していく" class="level4">
+<h4 class="anchored" data-anchor-id="listmatrixにベクトルを格納していく"><code>listMatrix</code>にベクトルを格納していく</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(n <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>nRank)){</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  le <span class="ot">&lt;-</span> n<span class="sc">+</span><span class="dv">1</span>  <span class="do">## ベクトルごとに列数を変える</span></span>
@@ -420,14 +420,14 @@ Note
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  A_n <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>le) </span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>               , <span class="at">ncol =</span> <span class="dv">1</span>)  </span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  listA[[n]] <span class="ot">&lt;-</span> A_n</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  listMatrix[[n]] <span class="ot">&lt;-</span> A_n</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="確認-1" class="level4">
 <h4 class="anchored" data-anchor-id="確認-1">確認</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(listA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(listMatrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
      [,1]
@@ -455,7 +455,7 @@ Note
 <p>テンソル<span class="math inline">\(\mathbf{\mathcal{X}}\)</span>と<span class="math inline">\(\{\boldsymbol{a}\}\)</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>X1 <span class="ot">&lt;-</span>  <span class="fu">TMall</span>(<span class="at">Tensor =</span> X</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>             , <span class="at">listA =</span> listA</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>             , <span class="at">listMatrix =</span> listMatrix</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>             , <span class="at">.isDebug =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3
@@ -523,7 +523,7 @@ Note
 <pre><code>[1] 2 3 4</code></pre>
 </div>
 </div>
-<p><code>X1</code>のサイズが<code>listA</code>の各要素のサイズと一致</p>
+<p><code>X1</code>のサイズが<code>listMatrix</code>の各要素のサイズと一致</p>
 </section>
 </section>
 </section>
@@ -532,19 +532,20 @@ Note
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R1D関数  ---------------------------------------------------------------------</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>R1D <span class="ot">&lt;-</span> <span class="cf">function</span>(listA){</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>R1D <span class="ot">&lt;-</span> <span class="cf">function</span>(listMatrix){</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="do">## 因子ベクトル{lista}の個数</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  N <span class="ot">&lt;-</span> <span class="fu">length</span>(listA)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  N <span class="ot">&lt;-</span> <span class="fu">length</span>(listMatrix)</span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="do">## N階テンソルX1の作成</span></span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  X1 <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="dv">1</span>,<span class="fu">rep</span>(<span class="dv">1</span>,N))</span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="do">## X1と{a}の全モード積を計算</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">TMall</span>(X1,listA)</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(X)</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  X <span class="ot">&lt;-</span> <span class="fu">TMall</span>(<span class="at">Tensor=</span>X1</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>             , <span class="at">listMatrix =</span> listMatrix)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(X)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p>引数：ベクトル<span class="math inline">\(\{\boldsymbol{a}\}\)</span>（ベクトル（行列型）のリスト）</p></li>
@@ -556,7 +557,7 @@ Note
 </section>
 <section id="r1d関数を使ってランク１テンソルを作成" class="level2">
 <h2 class="anchored" data-anchor-id="r1d関数を使ってランク１テンソルを作成">R1D関数を使ってランク１テンソルを作成</h2>
-<p>引数:<code>listA</code></p>
+<p>引数:<code>listMatrix</code></p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
@@ -579,7 +580,7 @@ Note
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>X2 <span class="ot">&lt;-</span> <span class="fu">R1D</span>(<span class="at">listA =</span> listA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>X2 <span class="ot">&lt;-</span> <span class="fu">R1D</span>(<span class="at">listMatrix =</span> listMatrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="確認-3" class="level4">
 <h4 class="anchored" data-anchor-id="確認-3">確認</h4>

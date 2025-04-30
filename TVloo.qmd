@@ -13,15 +13,40 @@ project:
 editor: visual
 ---
 
-## Quarto
+# TVlooはどんな関数か
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+テンソル$\mathbf{\mathcal{X}}$と，ベクトル$\{\boldsymbol{a}_{1},\boldsymbol{a}_{2},\cdots,\boldsymbol{a}_{N}\}$から１つのベクトル$\boldsymbol{a}_{k}$を除いた$\left\{\begin{array}{ccc}\boldsymbol{a}_{1}&\cdots&\boldsymbol{a}_{k-1}&\boldsymbol{a}_{k+1}&\cdots&\boldsymbol{a}_{N}\end{array}\right\}$との縮約をとる関数.
 
-## Running Code
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+![TVlooのイメージ](image/TVloo(1).png){width="30%" fig-align="left"}
+
+#### TVallから$\boldsymbol{a}_{k}$を排除した関数
+
+![](image/TVloo(2).png){}
+
+- $k$-modeのみが残る
+
+### 式で表すと，
+
+$$
+\boldsymbol{\mathrm{X}}_{(k)}(\boldsymbol{a}_{N}\otimes\cdots \otimes\boldsymbol{a}_{k-1}\otimes\boldsymbol{a}_{k+1}\otimes\cdots\otimes\boldsymbol{a}_{1} )
+$$
+
+- $\boldsymbol{a}_{N}\otimes\cdots \otimes\boldsymbol{a}_{k-1}\otimes\boldsymbol{a}_{k+1}\otimes\cdots\otimes\boldsymbol{a}_{1} = vec(\boldsymbol{a}_{1}\circ \cdots\circ\boldsymbol{a}_{k-1}\circ\boldsymbol{a}_{k+1}\circ\cdots\circ\boldsymbol{a}_{N})$
+<br><br>
+
+![](image/TVloo(3).png){width="30%"}
+
+- 第$k$モード行列展開することで，第$k$モード以外のモードを第2モードにまとめることができる.
+- ベクトルのクロネッカー積によって，まとめに1つのベクトルに.
+- 2つの行列積をとると第$k$モードだけ残る.
+
+
+# Rコードを作成
 
 ```{r}
+#| echo: false
+#| 
 setwd("E:/home/ryoke/research-site")
 
 ##setwd("E:/home/yoshida/research/tetsuya-work/nmf-tensor/ref/book/テンソルネットワークの基礎と応用/to-students/workspace/R/tensor-analysis-basics/test")
@@ -43,11 +68,349 @@ library(Matrix) ## 2025/04/04
 
 ```
 
-You can add options to executable code like this
+## 関数なしVer
+
+関数を使わずに，[第$k$モード]{style="color:#DC143C"}を除外して，テンソル$\mathbf{\mathcal{X}}$とベクトルの集合$\{\boldsymbol{a}\}$の積をとる
+
+
+#### 準備
+
+$3$階テンソル$\mathbf{\mathcal{G}}\in\mathbb{R}^{3\times4\times5}$
 
 ```{r}
-#| echo: false
-2 * 2
+## ## ##### サイズ(3,4,5)の3階テンソルを作成
+
+## サイズを指定
+shape <- c(3,4,5)
+
+G <- array(sample(1:5
+                  , 60
+                  , replace = TRUE)
+           ,shape)
+
+X <- G  ## コピー
+print(X)
+nRank <- length(shape)
+print(nRank)
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+
+ベクトルの集合$\{\boldsymbol{a}\}$
+
+```{r}
+## ## ##### ベクトルのリストを作成
+
+## 領域確保
+listA <- NULL
+
+## nRank（Gの階数）分の要素を作成
+for (n in c(1:nRank)) {
+  
+  A_n <- matrix(sample(1:5
+                       ,dim(G)[n]　## 第1モードサイズ
+                       , replace = TRUE
+                       )
+                , ncol = 1)　## 第2モード(列)サイズは1
+  
+  ## listAのn番目の要素として，ベクトルA_nを格納
+  listA[[n]] <- A_n
+}
+
+print(listA)
+
+```
+
+
+```{r}
+## liatAのサイズを格納するオブジェクト（縮退防止用？）
+shapeA <- NULL  ## 領域確保
+
+## listAの各ベクトルのサイズをshapeAに保存
+for(i in c(1:nRank)){
+  
+  A_i <- listA[[i]]
+  
+  shapeA <- c(shapeA
+              , nrow(A_i))
+}
+
+```
+
+
+
+```{r}
+## 同一性の確認
+## 積をとる前のテンソルXのサイズと{A}の各ベクトルのサイズは一致
+all.equal(shapeA
+          , dim(X))
+```
+
+
+### TVlooを計算（関数無し）
+
+除外するモード：$k$
+
+#### $k = 2$のとき
+
+```{r}
+## k番目を除外してそれぞれ第nモード積をとる
+
+k <- 2 
+
+for(n in c( 1:(k-1), (k+1):nRank )){
+  
+  A_n <- t(listA[[n]])
+  
+  X <- TMprod(Tensor = X
+              , Matrix = A_n
+              , modeID = n
+              )
+  
+  print(dim(X))
+}
+
+## ## ##### 2025/04/24
+X1 <- X　## 保存
+print(X1)
+print(dim(X1))
+
+```
+
+
+#### $k=1$のとき
+
+```{r}
+## ## ####### k = 1 の場合
+
+X <- G ## 戻す
+
+k <- 1
+
+for(n in c(2:nRank)){
+  
+  A_n <- t(listA[[n]])
+  
+  X <- TMprod(Tensor = X
+              , Matrix = A_n
+              , modeID = n
+  )
+  
+}
+
+X2 <- X
+print(dim(X2))
+
+```
+
+
+#### $k=nRank(3)$のとき
+
+```{r}
+## ## ##### k = nRank の場合
+
+X <- G
+
+k <- nRank
+
+for(n in c(1:(nRank-1))){
+  
+  A_n <- t(listA[[n]])
+  
+  X <- TMprod(Tensor = X
+              , Matrix = A_n
+              , modeID = n
+  )
+}
+
+X3 <- X
+print(dim(X3))
+```
+
+
+::: {.callout-tip title="loopの範囲"}
+
+loopの範囲を場合分けする必要がある
+
+$k = 1$のとき<br>
+`2:nRank`
+<br><br>
+$k = nRank$のとき<br>
+`1:(nRank-1)`
+<br><br>
+それ以外<br>
+`1:(k-1), (k+1):nRank`
+
+:::
+
+
+## TVloo関数
+
+##### コードの全体
+
+```{r}
+# TVloo -------------------------------------------------------------------
+TVloo <- function(Tensor
+                  ,listA
+                  , modeID  ## k番目のベクトルを取り除く
+                  , .isDebug = FALSE
+                  ){
+  shape <- dim(Tensor)
+  nRank <- length(shape)
+  
+  shapeA <- NULL
+  
+  for(i in c(1:nRank)){
+    A_i <- listA[[i]]
+    ## 転置している
+    shapeA <- c(shapeA, nrow(A_i))
+  }
+  
+  
+  ## 逐次更新するテンソルとshapeを作成
+  Tensor_new <- Tensor
+  shape_new <- shapeA
+  
+  ## 2025/04/24，kによって場合分け
+  ## loopにループ範囲を格納
+  if(k == 1){
+    loop <- c(2:nRank)
+  }else if(k == nRank){
+    loop <- c(1:(nRank-1))
+  }else{
+    loop <- c(1:(k-1), (k+1):nRank)
+  }
+  
+  
+  ## k番目を取り除いてループ
+  for (n in loop ) {
+    ## listA から行列を取得し，転置
+    A_n <- t(listA[[n]])
+    
+    Tensor_new <- TMprod(Tensor = Tensor_new
+                         , Matrix = A_n
+                         , modeID = n
+                         , shape = shape_new
+                         , .isDebug = .isDebug
+    )
+    ## shapeを更新
+    shape_new <- dim( Tensor_new )
+  }
+  
+  return(Tensor_new)
+}
+```
+
+
+
+
+::: {.callout-note title="コードについてのメモ"}
+
+### 引数
+
+- Tensor
+
+- listA
+
+- modeID<br>
+積をとらないモード番号（$k$）
+
+### shape
+
+```{r eval=FALSE}
+shapeA <- NULL
+  
+  for(i in c(1:nRank)){
+    A_i <- listA[[i]]
+    ## 転置している
+    shapeA <- c(shapeA, nrow(A_i))
+  }
+```
+
+`shapeA`には，Aの行数を格納
+
+### kの場合分け
+
+`loop`に範囲を格納→`for`の引数
+
+```{r eval=FALSE}
+## 2025/04/24，kによって場合分け
+  ## loopにループ範囲を格納
+  if(k == 1){
+    loop <- c(2:nRank)
+  }else if(k == nRank){
+    loop <- c(1:(nRank-1))
+  }else{
+    loop <- c(1:(k-1), (k+1):nRank)
+  }
+```
+
+:::
+
+
+## TVloo関数のテスト
+
+#### $k=2$のとき
+```{r}
+## TVloo関数を使って計算
+
+X <- G  ## 戻す
+
+k <- 2
+
+X4 <- TVloo(Tensor = X
+            , listA = listA
+            , modeID = k
+            , .isDebug = TRUE)
+
+print(dim(X4))
+
+## 同一性の確認
+all.equal(X1,X4)
+
+```
+
+#### $k=1,nRank$のとき
+
+```{r}
+## ## ##### k = 1のとき
+
+X <- G  ## 戻す
+
+k <- 1
+
+X5 <- TVloo(Tensor = X
+            , listA = listA
+            , modeID = k
+            , .isDebug = TRUE)
+
+print(dim(X5))
+
+## 同一性の確認
+all.equal(X2,X5)
+
+## ## ##### k = nRankのとき
+
+X <- G  ## 戻す
+
+k <- nRank
+
+X6 <- TVloo(Tensor = X
+            , listA = listA
+            , modeID = k
+            , .isDebug = TRUE)
+
+print(dim(X6))
+
+## 同一性の確認
+all.equal(X3,X6)
+
+```
+
+2025/04/24:全ての場合で正しく関数が動いたことを確認
+
+
+
+
+
+
+
