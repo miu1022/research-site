@@ -1,0 +1,71 @@
+---
+title: "R1ALS"
+author: "ryoke"
+format:
+  html:
+    theme: cosmo
+    ##css: styles.css
+    math: mathjax
+    toc: true
+    toc-depth: 3
+    code-fold: false
+project:
+  output-dir: docs    
+editor: visual
+---
+
+# べき乗法によるテンソルのランク1近似
+
+任意のテンソル$\boldsymbol{\mathcal{X}}$をランク1テンソルで近似する
+
+$\boldsymbol{\mathcal{X}}\in\mathbb{R}^{I_{1}\times\cdots I_{N}}$
+
+⇒ランク1テンソル$\boldsymbol{\mathcal{A}}=\lambda\boldsymbol{a}_{1}\circ\cdots\circ\boldsymbol{a}_{N}$
+
+-   一意にする為に，スケール係数（特異値）$\lambda$を使って表す.
+-   $\|\boldsymbol{a}_{1}\|=\cdots=\|\boldsymbol{a}_{N}\|=1$
+
+## ランク1近似を求める方法
+
+$\boldsymbol{\mathcal{X}}$の最適なランク1近似は
+
+コスト関数$\|\boldsymbol{\mathcal{X}}-\boldsymbol{\mathcal{A}}\|^{2}_{F}$を最小にする$\boldsymbol{\mathcal{A}}$
+
+-   $\boldsymbol{\mathcal{X}}$と$\boldsymbol{\mathcal{A}}$の距離の2乗
+
+式で表すと，
+
+$$
+\underset{\lambda, \boldsymbol{a}_{1},\cdots,\boldsymbol{a}_{N}}{minimize}\|\boldsymbol{\mathcal{X}}-\lambda\boldsymbol{a}_{1}\circ\cdots\circ\boldsymbol{a}_{N}\|\qquad s.t.\|\boldsymbol{a}_{1}\|=\cdots=\|\boldsymbol{a}_{N}\|=1
+$$
+
+### Goal
+
+$\|\boldsymbol{\mathcal{X}}-\lambda\boldsymbol{a}_{1}\circ\cdots\circ\boldsymbol{a}_{N}\|^{2}_{F}$を最小にするような，$\lambda,\boldsymbol{a}_{1},\cdots,\boldsymbol{a}_{N}$を求める.
+
+### 最適性条件
+
+最適な$\lambda,\boldsymbol{a}_{1},\cdots,\boldsymbol{a}_{N}$が満たす条件は，
+
+\begin{equation}
+\begin{aligned}
+
+\boldsymbol{a}_{1} &\in C(\boldsymbol{\mathrm{X}}_{(1)}(\boldsymbol{a}_{2}\otimes\cdots\otimes\boldsymbol{a}_{N}))\quad ,\|\boldsymbol{a}_{1}\|=1 \\
+\boldsymbol{a}_{2} &\in C(\boldsymbol{\mathrm{X}}_{(2)}(\boldsymbol{a}_{1}\otimes\boldsymbol{a}_{3}\otimes\cdots\otimes\boldsymbol{a}_{N}))\quad ,\|\boldsymbol{a}_{2}\|=1 \\
+
+\vdots \\
+\boldsymbol{a}_{n} &\in C(\boldsymbol{\mathrm{X}}_{(n)}(\boldsymbol{a}_{1}\otimes\cdots\otimes\boldsymbol{a}_{n-1}))\quad ,\|\boldsymbol{a}_{n}\|=1 \\
+\vdots \\
+\boldsymbol{a}_{N} &\in C(\boldsymbol{\mathrm{X}}_{(N)}(\boldsymbol{a}_{1}\otimes\cdots\otimes\boldsymbol{a}_{N-1}))\quad ,\|\boldsymbol{a}_{N}\|=1 \\
+
+\lambda&=\langle\boldsymbol{\mathcal{X}},\boldsymbol{a}_{1}\circ\cdots\boldsymbol{a}_{N}\rangle
+
+
+\end{aligned} 
+\end{equation}
+
+## 最適性条件とは，
+
+# Rコード
+
+aiueo

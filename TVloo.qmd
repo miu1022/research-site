@@ -15,16 +15,15 @@ editor: visual
 
 # TVlooはどんな関数か
 
-テンソル$\mathbf{\mathcal{X}}$と，ベクトル$\{\boldsymbol{a}_{1},\boldsymbol{a}_{2},\cdots,\boldsymbol{a}_{N}\}$から１つのベクトル$\boldsymbol{a}_{k}$を除いた$\left\{\begin{array}{ccc}\boldsymbol{a}_{1}&\cdots&\boldsymbol{a}_{k-1}&\boldsymbol{a}_{k+1}&\cdots&\boldsymbol{a}_{N}\end{array}\right\}$との縮約をとる関数.
-
+テンソル$\mathbf{\mathcal{X}}$と， ベクトル$\{\boldsymbol{a}_{1},\boldsymbol{a}_{2},\cdots,\boldsymbol{a}_{N}\}$から １つのベクトル$\boldsymbol{a}_{k}$を除いた $\left\{\begin{array}{ccc}\boldsymbol{a}_{1}&\cdots&\boldsymbol{a}_{k-1}&\boldsymbol{a}_{k+1}&\cdots&\boldsymbol{a}_{N}\end{array}\right\}$ との縮約をとる関数.
 
 ![TVlooのイメージ](image/TVloo(1).png){width="30%" fig-align="left"}
 
-#### TVallから$\boldsymbol{a}_{k}$を排除した関数
+#### TVallから$\boldsymbol{a}_{k}$を除いた関数
 
-![](image/TVloo(2).png){}
+![](image/TVloo(2).png)
 
-- $k$-modeのみが残る
+-   $k$-modeのみが残る
 
 ### 式で表すと，
 
@@ -32,15 +31,13 @@ $$
 \boldsymbol{\mathrm{X}}_{(k)}(\boldsymbol{a}_{N}\otimes\cdots \otimes\boldsymbol{a}_{k-1}\otimes\boldsymbol{a}_{k+1}\otimes\cdots\otimes\boldsymbol{a}_{1} )
 $$
 
-- $\boldsymbol{a}_{N}\otimes\cdots \otimes\boldsymbol{a}_{k-1}\otimes\boldsymbol{a}_{k+1}\otimes\cdots\otimes\boldsymbol{a}_{1} = vec(\boldsymbol{a}_{1}\circ \cdots\circ\boldsymbol{a}_{k-1}\circ\boldsymbol{a}_{k+1}\circ\cdots\circ\boldsymbol{a}_{N})$
-<br><br>
+-   $\boldsymbol{a}_{N}\otimes\cdots \otimes\boldsymbol{a}_{k-1}\otimes\boldsymbol{a}_{k+1}\otimes\cdots\otimes\boldsymbol{a}_{1} = vec(\boldsymbol{a}_{1}\circ \cdots\circ\boldsymbol{a}_{k-1}\circ\boldsymbol{a}_{k+1}\circ\cdots\circ\boldsymbol{a}_{N})$ <br><br>
 
 ![](image/TVloo(3).png){width="30%"}
 
-- 第$k$モード行列展開することで，第$k$モード以外のモードを第2モードにまとめることができる.
-- ベクトルのクロネッカー積によって，まとめに1つのベクトルに.
-- 2つの行列積をとると第$k$モードだけ残る.
-
+-   「第$k$モードで」行列展開することで， 第$k$モードが展開した行列での第1モードとなり， 第$k$モード以外のモードを第2モードにまとめることができる.
+-   ベクトルのクロネッカー積によって，まとめて1つのベクトルに．
+-   クロネッカー積で変換したベクトルを， 「第$k$モードで」行列展開した行列で写すことで， 第$k$モードのサイズのベクトルが生成される．
 
 # Rコードを作成
 
@@ -49,20 +46,28 @@ $$
 #| 
 setwd("E:/home/ryoke/research-site")
 
-##setwd("E:/home/yoshida/research/tetsuya-work/nmf-tensor/ref/book/テンソルネットワークの基礎と応用/to-students/workspace/R/tensor-analysis-basics/test")
+##setwd("E:/home/yoshida/research/tetsuya-work/nmf-tensor/ref/book/テンソルデータ解析の基礎と応用/to-students/workspace/R/tensor-analysis-basics/test")
 
 getwd()
 
-## ## ################################
-source("../workspace/R/テンソルデータ解析の基礎と応用/fold-unfold.R")
+## ## ################################ for Ryoke
+ source("../workspace/R/テンソルデータ解析の基礎と応用/fold-unfold.R")
 
-##source("../workspace/R/テンソルデータ解析の基礎と応用/TMprod-TMall.R")
-source("../workspace/R/テンソルデータ解析の基礎と応用/TMprod.R")
-source("../workspace/R/テンソルデータ解析の基礎と応用/TMall.R")
+ source("../workspace/R/テンソルデータ解析の基礎と応用/TMprod.R")
+ source("../workspace/R/テンソルデータ解析の基礎と応用/TMall.R")
 
-source("../workspace/R/テンソルデータ解析の基礎と応用/R1D.R")
+ source("../workspace/R/テンソルデータ解析の基礎と応用/R1D.R")
 
-source("../workspace/R/テンソルデータ解析の基礎と応用/TVloo.R")
+ source("../workspace/R/テンソルデータ解析の基礎と応用/TVloo.R")
+## ## #################### for Yoshida
+##source("../fold-unfold.R")
+
+##source("../TMprod.R")
+##source("../TMall.R")
+
+##source("../R1D.R")
+
+##source("../TVloo.R")
 
 library(Matrix) ## 2025/04/04
 
@@ -70,8 +75,7 @@ library(Matrix) ## 2025/04/04
 
 ## 関数なしVer
 
-関数を使わずに，[第$k$モード]{style="color:#DC143C"}を除外して，テンソル$\mathbf{\mathcal{X}}$とベクトルの集合$\{\boldsymbol{a}\}$の積をとる
-
+関数を使わずに， [第$k$モード]{style="color:#DC143C"}を除外して， テンソル$\mathbf{\mathcal{X}}$とベクトルの集合$\{\boldsymbol{a}\}$の積をとる
 
 #### 準備
 
@@ -93,7 +97,6 @@ print(X)
 nRank <- length(shape)
 print(nRank)
 ```
-
 
 ベクトルの集合$\{\boldsymbol{a}\}$
 
@@ -120,7 +123,6 @@ print(listA)
 
 ```
 
-
 ```{r}
 ## liatAのサイズを格納するオブジェクト（縮退防止用？）
 shapeA <- NULL  ## 領域確保
@@ -136,15 +138,12 @@ for(i in c(1:nRank)){
 
 ```
 
-
-
 ```{r}
 ## 同一性の確認
 ## 積をとる前のテンソルXのサイズと{A}の各ベクトルのサイズは一致
 all.equal(shapeA
           , dim(X))
 ```
-
 
 ### TVlooを計算（関数無し）
 
@@ -176,7 +175,6 @@ print(dim(X1))
 
 ```
 
-
 #### $k=1$のとき
 
 ```{r}
@@ -202,7 +200,6 @@ print(dim(X2))
 
 ```
 
-
 #### $k=nRank(3)$のとき
 
 ```{r}
@@ -226,22 +223,11 @@ X3 <- X
 print(dim(X3))
 ```
 
-
 ::: {.callout-tip title="loopの範囲"}
-
 loopの範囲を場合分けする必要がある
 
-$k = 1$のとき<br>
-`2:nRank`
-<br><br>
-$k = nRank$のとき<br>
-`1:(nRank-1)`
-<br><br>
-それ以外<br>
-`1:(k-1), (k+1):nRank`
-
+$k = 1$のとき<br> `2:nRank` <br><br> $k = nRank$のとき<br> `1:(nRank-1)` <br><br> それ以外<br> `1:(k-1), (k+1):nRank`
 :::
-
 
 ## TVloo関数
 
@@ -300,19 +286,14 @@ TVloo <- function(Tensor
 }
 ```
 
-
-
-
 ::: {.callout-note title="コードについてのメモ"}
-
 ### 引数
 
-- Tensor
+-   Tensor
 
-- listMatrix(2025/04/25 listAから変更)
+-   listMatrix(2025/04/25 listAから変更)
 
-- modeID<br>
-積をとらないモード番号（$k$）
+-   modeID<br> 積をとらないモード番号（$k$）
 
 ### shape
 
@@ -343,13 +324,12 @@ shapeA <- NULL
     loop <- c(1:(k-1), (k+1):nRank)
   }
 ```
-
 :::
-
 
 ## TVloo関数のテスト
 
 #### $k=2$のとき
+
 ```{r}
 ## TVloo関数を使って計算
 
@@ -363,30 +343,26 @@ X4 <- TVloo(Tensor = X
             , .isDebug = TRUE)
 ```
 
-
-
 ::: {.callout-note title="デバックの確認"}
+[\[1\] 3  4  5]{style="color:#DC143C"}： [初めのサイズ（$\mathbf{\mathcal{X}}$のサイズ）]{style="color:#DC143C"}
 
-[[1] 3 &nbsp;4 &nbsp;5]{style="color:#DC143C"}： [初めのサイズ（$\mathbf{\mathcal{X}}$のサイズ）]{style="color:#DC143C"}
+\[1\] 1
 
-[1] 1
+\[1\] 1  3：$\boldsymbol{a}^{\mathrm{T}}_{1}$のサイズ
 
-[1] 1 &nbsp;3：$\boldsymbol{a}^{\mathrm{T}}_{1}$のサイズ
+\[1\] 3  20： $\boldsymbol{\mathrm{X}}_{(1)}$のサイズ
 
-[1]  3 &nbsp;20： $\boldsymbol{\mathrm{X}}_{(1)}$のサイズ
+\[1\] 1  20：行列積$\boldsymbol{a}^{\mathrm{T}}_{1}\boldsymbol{\mathrm{X}}_{(1)}$のサイズ
 
-[1]  1 &nbsp;20：行列積$\boldsymbol{a}^{\mathrm{T}}_{1}\boldsymbol{\mathrm{X}}_{(1)}$のサイズ
+[\[1\] 1  4  5]{style="color:#DC143C"}： [第1モードの縮約をとった後（$\mathbf{\mathcal{X}}_{1}$とする）のサイズ]{style="color:#DC143C"}
 
-[[1] 1 &nbsp;4 &nbsp;5]{style="color:#DC143C"}： [第1モードの縮約をとった後（$\mathbf{\mathcal{X}}_{1}$とする）のサイズ]{style="color:#DC143C"}
+\[1\] 1
 
-[1] 1
+\[1\] 1  5：$\boldsymbol{a}^{\mathrm{T}}_{2}$のサイズ
 
-[1] 1 &nbsp;5：$\boldsymbol{a}^{\mathrm{T}}_{2}$のサイズ
+\[1\] 5  4：$\boldsymbol{\mathrm{X}}_{1(2)}$のサイズ
 
-[1] 5 &nbsp;4：$\boldsymbol{\mathrm{X}}_{1(2)}$のサイズ
-
-[1] 1 &nbsp;4：$\boldsymbol{a}^{\mathrm{T}}_{2}\boldsymbol{\mathrm{X}}_{1(2)}$のサイズ
-
+\[1\] 1  4：$\boldsymbol{a}^{\mathrm{T}}_{2}\boldsymbol{\mathrm{X}}_{1(2)}$のサイズ
 :::
 
 ```{r}
@@ -394,7 +370,6 @@ print(dim(X4))
 ```
 
 最終的なサイズが，第2モードのみが残っていることを確認．
-
 
 ```{r}
 ## 同一性の確認
@@ -440,10 +415,3 @@ all.equal(X3,X6)
 ```
 
 2025/04/24:全ての場合で正しく関数が動いたことを確認
-
-
-
-
-
-
-

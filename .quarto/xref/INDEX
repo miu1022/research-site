@@ -1,20 +1,14 @@
 {
-  "R1D.qmd": {
-    "R1D.html": "31ea6631"
-  },
-  "miu-research.qmd": {
-    "miu-research.html": "915ac664"
+  "R1ALS.qmd": {
+    "R1ALS.html": "9dde02d0"
   },
   "index.qmd": {
-    "index.html": "088f1738"
+    "index.html": "bb4d7a94"
+  },
+  "R1D.qmd": {
+    "R1D.html": "0c636dd5"
   },
   "TVloo.qmd": {
-    "TVloo.html": "1f9397df"
-  },
-  "R1D (2).qmd": {
-    "R1D (2).html": "2ce5344d"
-  },
-  "R1D (1).qmd": {
-    "R1D (1).html": "80cbcbb9"
+    "TVloo.html": "f82dc3e0"
   }
 }
